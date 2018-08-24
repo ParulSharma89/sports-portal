@@ -1,7 +1,11 @@
-<jqxGrid 
-  [theme]="'light'"
-  [width]="850" [source]="dataAdapter" [columns]="columns"
-  [pageable]="true" [autoheight]="true" [sortable]="true"
-  [altrows]="true" [enabletooltips]="true" [editable]="true"
-  [selectionmode]="'multiplecellsadvanced'" [columngroups]="columngroups">
-</jqxGrid>
+<!-- main app container -->
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                <alert></alert>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
