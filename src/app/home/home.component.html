@@ -1,2 +1,33 @@
-<h1>{{currentUser.username}}</h1>
-<p><a [routerLink]="['/login']">Logout</a></p>
+<div class="row">
+    <span id="title">Sports Portal</span>
+    <span id="account">{{currentUser.username}} | <a [routerLink]="['/login']">Logout</a></span>
+</div>
+<div id="data" class="row">
+    <div id="left">
+        <jqxLayout [theme]="'material'" [height]='610' [layout]='leftLayout'>
+            <div data-container="CountryPanel">
+            Display Country Tree View
+            </div>
+            <div data-container="PlayerRolePanel">
+            Display Player Role Tree View
+            </div>
+        </jqxLayout>
+    </div>
+
+    <div id="center">
+        <jqxDockingLayout [theme]="'material'" [height]='610' [layout]='centerLayout'>
+            <div data-container="PlayerImagePanel">
+            Show Player Image
+            </div>
+        </jqxDockingLayout>
+   </div>
+
+   <div id="right">
+       <jqxLayout [theme]="'material'" [height]='610' [layout]='rightLayout'>
+            <div data-container="PlayerDetailsPanel">
+            Show Player Details
+            </div>
+       </jqxLayout>
+   </div>
+<div>
+

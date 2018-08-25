@@ -2,14 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.4.
 
-# Test Credentials
-# Admin
-# username: Admin
-# password: Admin
+## Test Credentials
+Admin
+username: Admin
+password: Admin
 
-# Normal User
-# username: User
-# password: User
+Normal User
+username: User
+password: User
 
 ## Development server
 

@@ -5,7 +5,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/fake-backend';
-
 import { AppComponent }  from './app.component';
 import { routing }        from './app.routing';
 
@@ -17,6 +16,9 @@ import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { jqxLayoutComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxlayout';
+import { jqxDockingLayoutComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxdockinglayout';
+import { jqxTreeComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxtree';
 
 @NgModule({
     imports: [
@@ -29,7 +31,10 @@ import { LoginComponent } from './login/login.component';
         AppComponent,
         AlertComponent,
         HomeComponent,
-        LoginComponent
+        LoginComponent,
+        jqxLayoutComponent,
+        jqxDockingLayoutComponent,
+        jqxTreeComponent
     ],
     providers: [
         AuthGuard,

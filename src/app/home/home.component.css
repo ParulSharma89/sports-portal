@@ -1,0 +1,26 @@
+#account {
+    margin-left: 35%;
+}
+
+#title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 40%;
+}
+
+#data {
+    clear: right;
+}
+
+#left {
+    width: 30%;
+    margin-left: 2%;
+}
+
+#center {
+    width: 25%;
+}
+
+#right {
+    width: 41%;
+}
