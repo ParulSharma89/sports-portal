@@ -6,10 +6,20 @@
     <div id="left">
         <jqxLayout [theme]="'material'" [height]='610' [layout]='leftLayout'>
             <div data-container="CountryPanel">
-            Display Country Tree View
+                <div id="countryTree"></div>
+                <div id="countryMenu">
+                    <ul>
+                        <li><a href="#">Delete Player</a></li>
+                    </ul>
+                </div>
             </div>
             <div data-container="PlayerRolePanel">
-            Display Player Role Tree View
+                <div id="playerRoleTree"></div>
+                <div id="playerRoleMenu">
+                    <ul>
+                        <li><a href="#">Delete Player</a></li>
+                    </ul>
+                </div>
             </div>
         </jqxLayout>
     </div>
@@ -25,7 +35,12 @@
    <div id="right">
        <jqxLayout [theme]="'material'" [height]='610' [layout]='rightLayout'>
             <div data-container="PlayerDetailsPanel">
-            Show Player Details
+            <div *ngIf="currentUser.username === Admin">
+               <app-edit-player [player]="selectedPlayer"></app-edit-player>
+            </div>
+            <div>
+               <app-view-player [player]="selectedPlayer"></app-view-player>
+            </div>
             </div>
        </jqxLayout>
    </div>

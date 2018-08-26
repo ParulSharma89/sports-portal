@@ -24,3 +24,7 @@
 #right {
     width: 41%;
 }
+
+#countryTree, #playerRoleTree {
+    border: none;
+}

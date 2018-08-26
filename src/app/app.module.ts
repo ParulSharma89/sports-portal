@@ -5,8 +5,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/fake-backend';
-import { AppComponent }  from './app.component';
-import { routing }        from './app.routing';
+import { AppComponent } from './app.component';
+import { routing } from './app.routing';
 
 import { AlertComponent } from './_directives/alert.component';
 import { AuthGuard } from './_guards/auth.guard';
@@ -15,10 +15,13 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { HomeComponent } from './home/home.component';
+import { EditPlayerComponent } from './player/editPlayer.component';
+import { ViewPlayerComponent } from './player/viewPlayer.component';
 import { LoginComponent } from './login/login.component';
 import { jqxLayoutComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxlayout';
 import { jqxDockingLayoutComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxdockinglayout';
 import { jqxTreeComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxtree';
+import { jqxMenuComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxmenu';
 
 @NgModule({
     imports: [
@@ -31,10 +34,13 @@ import { jqxTreeComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxtree
         AppComponent,
         AlertComponent,
         HomeComponent,
+        EditPlayerComponent,
+        ViewPlayerComponent,
         LoginComponent,
         jqxLayoutComponent,
         jqxDockingLayoutComponent,
-        jqxTreeComponent
+        jqxTreeComponent,
+        jqxMenuComponent
     ],
     providers: [
         AuthGuard,

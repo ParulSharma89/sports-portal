@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
+import { User } from '../_models/user';
+import { Player } from '../_models/player';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
-    users: Array<any>
+    users: Array<User>;
+    players: Array<Player>;
 
     constructor() {
        this.users = [
@@ -19,7 +22,164 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                username: 'User',
                password: 'User'
            },
-       ]
+       ];
+
+       this.players = [
+       {
+                'id': 'Ind1',
+                'name': 'Virat Kohli',
+                'country': 'India',                
+                'playerRole': 'Batsman',
+                'image': ''
+            },
+            {
+                'id': 'Ind2',
+                'name': 'MS Dhoni',
+                'country': 'India',
+                'playerRole': 'Wicket Keeper',
+                'image': ''
+            },
+            {
+                'id': 'Ind3',
+                'name': 'Yuvraj Singh',
+                'country': 'India',
+                'playerRole': 'All Rounder',
+                'image': ''
+            },
+            {
+                'id': 'Ind4',
+                'name': 'Ajinkya Rahane',
+                'country': 'India',
+                'playerRole': 'Batsman',
+                'image': ''
+            },
+            {
+                'id': 'Ind5',
+                'name': 'Hardik Pandya',
+                'country': 'India',
+                'playerRole': 'All Rounder',
+                'image': ''
+            },
+            {
+                'id': 'Ind6',
+                'name': 'Ashish Nehra',
+                'country': 'India',
+                'playerRole': 'Bowler',
+                'image': ''
+            },
+            {
+                'id': 'Ind7',
+                'name': 'Jasprit Bumrah',
+                'country': 'India',
+                'playerRole': 'Bowler',
+                'image': ''
+            },
+            {
+                'id': 'Ind8',
+                'name': 'Umesh Yadav',
+                'country': 'India',
+                'playerRole': 'Bowler',
+                'image': ''
+            },
+            {
+                'id': 'Ind9',
+                'name': 'Shikhar Dhawan',
+                'country': 'India',
+                'playerRole': 'Batsman',
+                'image': ''
+            },
+            {
+                'id': 'Ind10',
+                'name': 'Rohit Sharma',
+                'country': 'India',
+                'playerRole': 'Batsman',
+                'image': ''
+            },
+            {
+                'id': 'Ind11',
+                'name': 'Ravichandran Ashwin',
+                'country': 'India',
+                'playerRole': 'Bowler',
+                'image': ''
+            },
+            {
+                'id': 'Aus1',
+                'name': 'Aaron Finch',
+                'country': 'Australia',
+                'playerRole': 'Batsman',
+                'image': ''
+            },
+            {
+                'id': 'Aus2',
+                'name': 'Tim Paine',
+                'country': 'Australia',
+                'playerRole': 'Wicket Keeper',
+                'image': ''
+            },
+            {
+                'id': 'Aus3',
+                'name': 'Travis Head',
+                'country': 'Australia',
+                'playerRole': 'All Rounder',
+                'image': ''
+            },
+            {
+                'id': 'Aus4',
+                'name': 'Chris Lynn',
+                'country': 'Australia',
+                'playerRole': 'Batsman',
+                'image': ''
+            },
+            {
+                'id': 'Aus5',
+                'name': 'Ashton Agar',
+                'country': 'Australia',
+                'playerRole': 'All Rounder',
+                'image': ''
+            },
+            {
+                'id': 'Aus6',
+                'name': 'Jackson Bird',
+                'country': 'Australia',
+                'playerRole': 'Bowler',
+                'image': ''
+            },
+            {
+                'id': 'Aus7',
+                'name': 'Chadd Sayers',
+                'country': 'Australia',
+                'playerRole': 'Bowler',
+                'image': ''
+            },
+            {
+                'id': 'Aus8',
+                'name': 'Mitchell Starc',
+                'country': 'Australia',
+                'playerRole': 'Bowler',
+                'image': ''
+            },
+            {
+                'id': 'Aus9',
+                'name': 'Matt Renshaw',
+                'country': 'Australia',
+                'playerRole': 'Batsman',
+                'image': ''
+            },
+            {
+                'id': 'Aus10',
+                'name': "Joe Burns",
+                'country': "Australia",
+                'playerRole': 'Batsman',
+                'image': ''
+            },
+            {
+                'id': 'Aus11',
+                'name': 'Kane Richardson',
+                'country': 'Australia',
+                'playerRole': 'Bowler',
+                'image': ''
+            }
+    ];
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -42,6 +202,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         username: user.username,
                         token: 'fake-jwt-token'
                     };
+                    localStorage.setItem('playerDetails', JSON.stringify(this.players));
 
                     return of(new HttpResponse({ status: 200, body: body }));
                 } else {
