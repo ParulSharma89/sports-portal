@@ -27,7 +27,8 @@
     <div id="center">
         <jqxDockingLayout [theme]="'material'" [height]='610' [layout]='centerLayout'>
             <div data-container="PlayerImagePanel">
-            Show Player Image
+            <img [src]="selectedPlayer?.image" height="400">
+            <br/>
             </div>
         </jqxDockingLayout>
    </div>
@@ -36,14 +37,15 @@
        <div #jqxRightLayout id="jqxRightLayout">
             <div data-container="PlayerDetailsPanel">
                <div id="view-details-container">
+                   <form>
                        <div>
                             <label for="playerName">Name: </label>
-                            <input [(ngModel)]="playerNameValue" type="text"/>
+                            <input class="form-control" [(ngModel)]="playerNameValue" name="playerNameValue" type="text"/>
                         </div>
 
                         <div>
                             <label for="playerCountry">Country: </label>
-                            <select [(ngModel)]="playerCountryValue" >
+                            <select class="form-control" [(ngModel)]="playerCountryValue" name="playerCountryValue">
                                 <option value="" selected>Select Country</option>
                                 <option value="India">India</option>
                                 <option value="Pakistan">Pakistan</option>
@@ -56,7 +58,7 @@
 
                         <div>
                             <label for="playerRole">Player Role: </label>
-                            <select [(ngModel)]="playerRoleValue">
+                            <select class="form-control" [(ngModel)]="playerRoleValue" name="playerRoleValue">
                                 <option value="">Select Player Role</option>
                                 <option value="Batsman">Batsman</option>
                                 <option value="Bowler">Bowler</option>
@@ -69,6 +71,10 @@
                             <span id="addNewButton">Add New Player</span>
                             <span id="saveButton">Save</span>
                         </div>
+                
+                
+                
+                </form>
                 </div>
             </div>
        </div>
@@ -79,20 +85,20 @@
          <div *ngIf="!isAdminUser" data-container="PlayerDetailsPanel">
                <div id="view-details-container">
                     <div class="row">
-                        <span>Name:</span>
-                        <span #viewPlayerName></span>
+                        <span><b>Name: </b></span>
+                        <span> {{selectedPlayer?.name}} </span>
                     </div>
                     <br />
 
                     <div class="row">
-                        <span>Country:</span>
-                        <span #viewPlayerCountry></span>
+                        <span><b>Country: </b></span>
+                        <span> {{selectedPlayer?.country}} </span>
                     </div>
                     <br />
 
                     <div class="row">
-                        <span>Player Role</span>
-                        <span #viewPlayerRole></span>
+                        <span><b>Player Role: </b></span>
+                        <span> {{selectedPlayer?.playerRole}} </span>
                     </div>
                     <br />
                 </div>
@@ -107,12 +113,12 @@
                Add New Player
                     <div>
                         <label for="playerName">Name: </label>
-                        <input [(ngModel)]="playerNameValue" type="text"/>
+                        <input class="form-control" [(ngModel)]="playerNameValueAdd" type="text"/>
                     </div>
 
                     <div>
                         <label for="playerCountry">Country: </label>
-                            <select [(ngModel)]="playerCountryValue" >
+                            <select class="form-control" [(ngModel)]="playerCountryValueAdd" >
                                 <option value="" selected>Select Country</option>
                                 <option value="India">India</option>
                                 <option value="Pakistan">Pakistan</option>
@@ -125,7 +131,7 @@
 
                     <div>
                         <label for="playerRole">Player Role: </label>
-                            <select [(ngModel)]="playerRoleValue">
+                            <select class="form-control" [(ngModel)]="playerRoleValueAdd">
                                 <option value="">Select Player Role</option>
                                 <option value="Batsman">Batsman</option>
                                 <option value="Bowler">Bowler</option>
@@ -136,8 +142,9 @@
 
                     <div>
                         <label for="playerImage">Player Image: </label>
-                        <img [src]="url" height="200"> <br/>
-                        <input type='file' (change)="onSelectFile($event)">
+                        <img [src]="url" height="200">
+                        <br/>
+                        <input #inputImage type='file'>
                     </div>
 
                     <div id="buttons">

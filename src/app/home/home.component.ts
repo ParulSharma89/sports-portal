@@ -25,8 +25,11 @@ export class HomeComponent implements AfterViewInit {
     isAddUserClicked: boolean = false;
     myJqxRightLayout: jqwidgets.jqxLayout;
     @ViewChild('jqxRightLayout') jqxRightLayout: jqxLayoutComponent;
-    @ViewChild('viewPlayerName') viewPlayerName: ElementRef;
-    url: string = ''
+    @ViewChild('inputImage') input;
+    url = '';
+    playerNameValue: any;
+    playerCountryValue: any;
+    playerRoleValue: any;
     
     constructor() {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -35,8 +38,16 @@ export class HomeComponent implements AfterViewInit {
         } else {
             this.isAdminUser = false;
         }
+
         this.isAddUserClicked = JSON.parse(localStorage.getItem('isAddUserClicked'));
         this.playerData = JSON.parse(localStorage.getItem('playerDetails'));
+        this.selectedPlayer = JSON.parse(localStorage.getItem('selectedPlayer'));
+        if (!!this.selectedPlayer) {
+          this.playerNameValue = this.selectedPlayer.name;
+          this.playerCountryValue = this.selectedPlayer.country;
+          this.playerRoleValue = this.selectedPlayer.playerRole;
+        }
+        
         this.source = {
         datatype: 'json',
         datafields: [
@@ -56,6 +67,21 @@ export class HomeComponent implements AfterViewInit {
 
    ngAfterViewInit() {
        this.myJqxRightLayout = jqwidgets.createInstance('#jqxRightLayout', 'jqxLayout', { theme: 'material', height: '100%', layout: this.rightLayout });
+       
+       if (!!this.input) {
+           this.input.nativeElement.addEventListener('change', function(event) {
+            console.log("test");
+            if (event.target.files && event.target.files[0]) {
+                var reader = new FileReader();
+
+                reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+                reader.onload = (event) => { // called once readAsDataURL is completed
+                    this.url = event.target.result;
+                }
+            }
+        });
+       }
    }
 
     leftLayout: any[] = this.generateLeftLayout();
@@ -88,8 +114,9 @@ export class HomeComponent implements AfterViewInit {
                                         let matchedPlayers = allPlayers.filter(player => {
                                            return player.id === item.element.id;
                                         });
-                                        this.selectedPlayer = matchedPlayers.length ? matchedPlayers[0] : null;
-                                        localStorage.setItem('selectedPlayer', JSON.stringify(this.selectedPlayer));
+                                        var selectedPlayer = matchedPlayers.length ? matchedPlayers[0] : null;
+                                        localStorage.setItem('selectedPlayer', JSON.stringify(selectedPlayer));
+                                        window.location.reload();
                                     }
                                 });
 
@@ -142,7 +169,9 @@ export class HomeComponent implements AfterViewInit {
                                         let matchedPlayers = allPlayers.filter(player => {
                                            return player.id === item.element.id;
                                         });
-                                        this.selectedPlayer = matchedPlayers.length ? matchedPlayers[0] : null;
+                                        var selectedPlayer = matchedPlayers.length ? matchedPlayers[0] : null;
+                                        localStorage.setItem('selectedPlayer', JSON.stringify(selectedPlayer));
+                                        window.location.reload();
                                     }    
                                 });
 
@@ -245,16 +274,5 @@ export class HomeComponent implements AfterViewInit {
             }];
         return rightLayout;
     }
-
-    onSelectFile(event) {
-    if (event.target[0].files && event.target[0].files[0]) {
-      var reader = new FileReader();
-
-      reader.readAsDataURL(event.target[0].files[0]); // read file as data url
-
-      reader.onload = (event) => { // called once readAsDataURL is completed
-        this.url = event.target[0].result;
-      }
-    }
-  }
+    
 }
