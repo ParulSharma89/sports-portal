@@ -30,21 +30,21 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 'name': 'Virat Kohli',
                 'country': 'India',                
                 'playerRole': 'Batsman',
-                'image': ''
+                'image': 'https://i.cricketcb.com/stats/img/faceImages/1413.jpg'
             },
             {
                 'id': 'Ind2',
                 'name': 'MS Dhoni',
                 'country': 'India',
                 'playerRole': 'Wicket Keeper',
-                'image': ''
+                'image': 'https://i.cricketcb.com/stats/img/faceImages/265.jpg'
             },
             {
                 'id': 'Ind3',
                 'name': 'Yuvraj Singh',
                 'country': 'India',
                 'playerRole': 'All Rounder',
-                'image': ''
+                'image': 'https://i.cricketcb.com/stats/img/faceImages/69.jpg'
             },
             {
                 'id': 'Ind4',

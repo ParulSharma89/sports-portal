@@ -25,6 +25,7 @@
      "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxlayout",
      "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxdockinglayout",
      "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxtree",
-     "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxmenu"
+     "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxmenu",
+     "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxbuttons"
   ]
 }

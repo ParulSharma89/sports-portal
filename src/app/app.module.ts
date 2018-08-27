@@ -1,6 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule }    from '@angular/forms';
+import { ReactiveFormsModule, FormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // used to create fake backend
@@ -15,18 +15,18 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { HomeComponent } from './home/home.component';
-import { EditPlayerComponent } from './player/editPlayer.component';
-import { ViewPlayerComponent } from './player/viewPlayer.component';
 import { LoginComponent } from './login/login.component';
 import { jqxLayoutComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxlayout';
 import { jqxDockingLayoutComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxdockinglayout';
 import { jqxTreeComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxtree';
 import { jqxMenuComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxmenu';
+import { jqxButtonComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxbuttons';
 
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
+        FormsModule,
         HttpClientModule,
         routing
     ],
@@ -34,13 +34,12 @@ import { jqxMenuComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxmenu
         AppComponent,
         AlertComponent,
         HomeComponent,
-        EditPlayerComponent,
-        ViewPlayerComponent,
         LoginComponent,
         jqxLayoutComponent,
         jqxDockingLayoutComponent,
         jqxTreeComponent,
-        jqxMenuComponent
+        jqxMenuComponent,
+        jqxButtonComponent
     ],
     providers: [
         AuthGuard,

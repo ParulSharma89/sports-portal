@@ -32,17 +32,122 @@
         </jqxDockingLayout>
    </div>
 
-   <div id="right">
-       <jqxLayout [theme]="'material'" [height]='610' [layout]='rightLayout'>
+   <div *ngIf="isAdminUser && !isAddUserClicked" id="right">
+       <div #jqxRightLayout id="jqxRightLayout">
             <div data-container="PlayerDetailsPanel">
-            <div *ngIf="currentUser.username === Admin">
-               <app-edit-player [player]="selectedPlayer"></app-edit-player>
+               <div id="view-details-container">
+                       <div>
+                            <label for="playerName">Name: </label>
+                            <input [(ngModel)]="playerNameValue" type="text"/>
+                        </div>
+
+                        <div>
+                            <label for="playerCountry">Country: </label>
+                            <select [(ngModel)]="playerCountryValue" >
+                                <option value="" selected>Select Country</option>
+                                <option value="India">India</option>
+                                <option value="Pakistan">Pakistan</option>
+                                <option value="Sri Lanka">Sri Lanka</option>
+                                <option value="South Africa">South Africa</option>
+                                <option value="Australia">Australia</option>
+                                <option value="New Zealand">New Zealand</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="playerRole">Player Role: </label>
+                            <select [(ngModel)]="playerRoleValue">
+                                <option value="">Select Player Role</option>
+                                <option value="Batsman">Batsman</option>
+                                <option value="Bowler">Bowler</option>
+                                <option value="All Rounder">All Rounder</option>
+                                <option value="Wicket Keeper">Wicket Keeper</option>
+                            </select>
+                        </div>
+
+                        <div id="buttons">
+                            <span id="addNewButton">Add New Player</span>
+                            <span id="saveButton">Save</span>
+                        </div>
+                </div>
             </div>
-            <div>
-               <app-view-player [player]="selectedPlayer"></app-view-player>
-            </div>
-            </div>
-       </jqxLayout>
+       </div>
    </div>
-<div>
+
+   <div *ngIf="!isAdminUser && !isAddUserClicked" id="right">
+       <div #jqxRightLayout id="jqxRightLayout">
+         <div *ngIf="!isAdminUser" data-container="PlayerDetailsPanel">
+               <div id="view-details-container">
+                    <div class="row">
+                        <span>Name:</span>
+                        <span #viewPlayerName></span>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <span>Country:</span>
+                        <span #viewPlayerCountry></span>
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <span>Player Role</span>
+                        <span #viewPlayerRole></span>
+                    </div>
+                    <br />
+                </div>
+            </div>
+       </div>
+    </div>
+
+    <div *ngIf="isAdminUser && isAddUserClicked" id="right">
+       <div #jqxRightLayout id="jqxRightLayout">
+           <div data-container="PlayerDetailsPanel">
+               <div id="view-details-container">
+               Add New Player
+                    <div>
+                        <label for="playerName">Name: </label>
+                        <input [(ngModel)]="playerNameValue" type="text"/>
+                    </div>
+
+                    <div>
+                        <label for="playerCountry">Country: </label>
+                            <select [(ngModel)]="playerCountryValue" >
+                                <option value="" selected>Select Country</option>
+                                <option value="India">India</option>
+                                <option value="Pakistan">Pakistan</option>
+                                <option value="Sri Lanka">Sri Lanka</option>
+                                <option value="South Africa">South Africa</option>
+                                <option value="Australia">Australia</option>
+                                <option value="New Zealand">New Zealand</option>
+                            </select>
+                    </div>
+
+                    <div>
+                        <label for="playerRole">Player Role: </label>
+                            <select [(ngModel)]="playerRoleValue">
+                                <option value="">Select Player Role</option>
+                                <option value="Batsman">Batsman</option>
+                                <option value="Bowler">Bowler</option>
+                                <option value="All Rounder">All Rounder</option>
+                                <option value="Wicket Keeper">Wicket Keeper</option>
+                            </select>
+                    </div>
+
+                    <div>
+                        <label for="playerImage">Player Image: </label>
+                        <img [src]="url" height="200"> <br/>
+                        <input type='file' (change)="onSelectFile($event)">
+                    </div>
+
+                    <div id="buttons">
+                        <div id="saveButton">Save</div>
+                    </div>
+
+                </div>
+           </div>
+       </div>
+
+    </div>
+</div>
 

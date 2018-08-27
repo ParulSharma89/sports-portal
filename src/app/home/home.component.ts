@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { User } from '../_models/user';
 import { Player } from '../_models/player';
 import { first } from 'rxjs/operators';
+import { FormsModule } from '@angular/forms';
 import { jqxMenuComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxmenu';
-import { ViewPlayerComponent } from '../player/viewPlayer.component';
-import { EditPlayerComponent } from '../player/editPlayer.component';
+import { jqxButtonComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxbuttons';
+import { jqxLayoutComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxlayout';
 
 @Component({
     selector: 'app-home',
@@ -12,7 +13,7 @@ import { EditPlayerComponent } from '../player/editPlayer.component';
     styleUrls: ['home.component.css']
 })
 
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
     currentUser: User;
     playerData: Array<Player>;
     source: any;
@@ -20,9 +21,21 @@ export class HomeComponent {
     countryTreeSource: any;
     playerRoleTreeSource: any;
     selectedPlayer: any;
+    isAdminUser: boolean;
+    isAddUserClicked: boolean = false;
+    myJqxRightLayout: jqwidgets.jqxLayout;
+    @ViewChild('jqxRightLayout') jqxRightLayout: jqxLayoutComponent;
+    @ViewChild('viewPlayerName') viewPlayerName: ElementRef;
+    url: string = ''
     
     constructor() {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (this.currentUser.username === 'Admin') {
+           this.isAdminUser = true;
+        } else {
+            this.isAdminUser = false;
+        }
+        this.isAddUserClicked = JSON.parse(localStorage.getItem('isAddUserClicked'));
         this.playerData = JSON.parse(localStorage.getItem('playerDetails'));
         this.source = {
         datatype: 'json',
@@ -39,7 +52,11 @@ export class HomeComponent {
     this.dataAdapter = new jqx.dataAdapter(this.source, { autoBind: true });
     this.countryTreeSource = this.dataAdapter.getGroupedRecords(['country'], 'items', 'label', [{ name: 'name', map: 'label' }]);
     this.playerRoleTreeSource = this.dataAdapter.getGroupedRecords(['playerRole'], 'items', 'label', [{ name: 'name', map: 'label' }]);
-    }
+   }
+
+   ngAfterViewInit() {
+       this.myJqxRightLayout = jqwidgets.createInstance('#jqxRightLayout', 'jqxLayout', { theme: 'material', height: '100%', layout: this.rightLayout });
+   }
 
     leftLayout: any[] = this.generateLeftLayout();
     centerLayout: any[] = this.generateCenterLayout();
@@ -66,6 +83,7 @@ export class HomeComponent {
                                 myCountryTree.addEventHandler('select', function(event) {
                                     let item = myCountryTree.getItem(event.args.element);
                                     myCountryTree.selectItem(item);
+
                                     if (item !== null) {
                                         let matchedPlayers = allPlayers.filter(player => {
                                            return player.id === item.element.id;
@@ -204,11 +222,39 @@ export class HomeComponent {
                         height: 400,
                         minHeight: 200,
                         title: 'Player Details',
-                        contentContainer: 'PlayerDetailsPanel'
+                        contentContainer: 'PlayerDetailsPanel',
+                        initContent: () => {
+                            if (!this.isAddUserClicked) {
+                                var myAddButton: jqwidgets.jqxButton = jqwidgets.createInstance('#addNewButton', 'jqxButton', { theme: 'material', width: 100, height: 20 });
+                                myAddButton.addEventHandler('click', function() {
+                                    this.isAddUserClicked = true;
+                                    localStorage.setItem('isAddUserClicked', this.isAddUserClicked);
+                                    window.location.reload();
+                                });
+                            }
+
+                            var mySaveButton: jqwidgets.jqxButton = jqwidgets.createInstance('#saveButton', 'jqxButton', { theme: 'material', width: 100, height: 20 });
+                            mySaveButton.addEventHandler('click', function() {
+                                this.isAddUserClicked = false;
+                                localStorage.setItem('isAddUserClicked', this.isAddUserClicked);
+                                window.location.reload();
+                            });
+                        }
                     }]
                 }]
             }];
         return rightLayout;
     }
 
+    onSelectFile(event) {
+    if (event.target[0].files && event.target[0].files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target[0].files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.url = event.target[0].result;
+      }
+    }
+  }
 }

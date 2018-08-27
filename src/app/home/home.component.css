@@ -28,3 +28,20 @@
 #countryTree, #playerRoleTree {
     border: none;
 }
+
+#value {
+    margin-left: 2%;
+}
+
+#view-details-container {
+    margin: 15% 10%;
+    width: 75%;
+}
+
+#saveButton, #newSaveButton {
+    float: right;
+}
+
+#buttons {
+    margin-top: 15%;
+}
